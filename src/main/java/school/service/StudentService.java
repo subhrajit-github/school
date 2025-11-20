@@ -47,6 +47,38 @@ public class StudentService {
 		return res;
 		
 	}
+	
+	
+	public int update(Student stu) {
+		int res=0;
+		String sql="UPDATE student set age=?,name=? where id=?";
+		try {
+			PreparedStatement pstm=con.prepareStatement(sql);
+			pstm.setInt(1, stu.getAge());
+			pstm.setString(2,stu.getName());
+			pstm.setInt(3, stu.getId());
+			
+			res=pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
+	
+	
+	public int delete(int id) {
+		int res=0;
+		String sql="DELETE from student where id=?";
+		
+		try {
+			PreparedStatement pstm=con.prepareStatement(sql);
+			pstm.setInt(1, id);
+			res=pstm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return res;
+	}
 
 }
 

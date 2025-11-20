@@ -10,7 +10,6 @@ public class StudentDriver {
 	public static void main(String[] args) {
 		
 		StudentService service=new StudentService();
-		
 		Scanner sc=new Scanner(System.in);
 		System.out.println("WELCOME TO TECHNO SCHOOL");
 		while(true) {
@@ -33,7 +32,7 @@ public class StudentDriver {
 				System.out.println("Enter your age");
 				int age=sc.nextInt();
 				
-				Student st=new Student();
+			Student st=new Student();
 				st.setId(id);
 				st.setName(name);
 				st.setAge(age);
@@ -44,13 +43,35 @@ public class StudentDriver {
 				break;
 			case 2:
 			//call update()
-				System.out.println();
+				System.out.println("enter your id to be updated");
+				int idu=sc.nextInt();
+				System.out.println("enter your name to be updated");
+				String nameu=sc.next();
+				System.out.println("Enter your age to be updated");
+				int ageu=sc.nextInt();
+				Student stu=new Student();
+				stu.setAge(ageu);
+				stu.setName(nameu);
+				stu.setId(idu);
+				int update=service.update(stu);
+				if(update!=0) {
+					System.out.println("data updated");
+				}
 				break;
 			case 3:
 				//call fetch();
 				break;
 			case 4:
 				//call delete();
+				System.out.println("enter your id to be deleted");
+				int idd=sc.nextInt();
+				int delete=service.delete(idd);
+				if(delete!=0) {
+					System.out.println("data is deleted");
+				}
+				else {
+					System.out.println("ID INVALID!!!");
+				}
 				break;
 			case 5:
 				//call close()
