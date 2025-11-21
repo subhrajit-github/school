@@ -1,5 +1,8 @@
 package school.driver;
 
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import school.entity.Student;
@@ -60,6 +63,16 @@ public class StudentDriver {
 				break;
 			case 3:
 				//call fetch();
+				List<Student> sts=service.fetch();
+				if(sts!=null) {
+					for(Student student:sts) {
+						System.out.println(student.toString());
+					}
+					System.out.println("data fetched");
+				}
+				else {
+					System.out.println("data not found");
+				}
 				break;
 			case 4:
 				//call delete();

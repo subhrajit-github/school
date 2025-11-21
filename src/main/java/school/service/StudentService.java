@@ -3,7 +3,10 @@ package school.service;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import school.entity.Student;
 
@@ -79,6 +82,38 @@ public class StudentService {
 		}
 		return res;
 	}
+	public List<Student> fetch(){
+		List<Student> list=new ArrayList<Student>();
+		String sql="SELECT * from student";
+		try {
+			PreparedStatement pstm=con.prepareStatement(sql);
+			ResultSet resultSet=pstm.executeQuery();
+			while(resultSet.next()) {
+				int id=resultSet.getInt(1);
+				String name=resultSet.getString(2);
+				int age=resultSet.getInt(3);
+				Student st=new Student();
+				st.setId(id);
+				st.setName(name);
+				st.setAge(age);
+				//list.add(new Student(resultSet.getInt(1),resultSet.getString(2),resultSet.getInt(3)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	public boolean exit() {
+		try {
+			con.close();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	}
 
-}
+
 
